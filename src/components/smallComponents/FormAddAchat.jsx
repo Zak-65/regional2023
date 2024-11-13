@@ -36,7 +36,7 @@ export default function FormAddAchats({ produits, clients }) {
 
   return (
     <form
-      className="max-w-sm w-full p-6  m-5 bg-white rounded-lg shadow-lg dark:bg-gray-900 dark:shadow-lg dark:border-gray-700"
+      className="max-w-sm w-full p-6  mt-28 bg-white rounded-lg shadow-lg dark:bg-gray-900 dark:shadow-lg dark:border-gray-700"
       onSubmit={handleSubmit}
     >
       {/* Title */}

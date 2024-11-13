@@ -1,6 +1,5 @@
-import { useState } from "react";
 
-export default function Table({ produits, filtredAchats, clients }) {
+export default function Table({ produits,filtredAchats, clients }) {
   return (
     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
       <caption className="p-5 text-lg font-semibold text-gray-900 bg-white dark:text-white dark:bg-gray-800">
