@@ -1,4 +1,4 @@
-import initialData from "../data/data";
+import initialData from "../../data/data";
 
 const initialProduits = {
   produits: initialData.produits,
