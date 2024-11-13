@@ -1,9 +1,5 @@
-import { useSelector } from "react-redux";
 
-export default function Table() {
-  const achats = useSelector((state) => state.achatReducer.achats);
-  const clients = useSelector((state) => state.clientReducer.clients);
-  const produits = useSelector((state) => state.produitReducer.produits);
+export default function Table({produits,achats,clients}) {
 
   return (
     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
