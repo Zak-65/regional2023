@@ -1,6 +1,5 @@
-
-export default function Table({produits,achats,clients}) {
-
+export default function Table({ produits, achats, clients }) {
+  function handleDelete() {}
   return (
     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
       <caption className="p-5 text-lg font-semibold text-gray-900 bg-white dark:text-white dark:bg-gray-800">
@@ -32,7 +31,7 @@ export default function Table({produits,achats,clients}) {
         {achats.map((achat, index) => {
           const client = clients.find((c) => c.numero == achat.numero);
           const produit = produits.find((p) => p.codeProduit == achat.codeProduit);
-          
+
           return (
             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700" key={index}>
               <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
@@ -42,7 +41,11 @@ export default function Table({produits,achats,clients}) {
               <td className="px-6 py-4">{achat.qte}</td>
               <td className="px-6 py-4">{produit.prix}</td>
               <td className="px-6 py-4 text-right">
-                <a href="#" className="font-medium text-red-600 dark:text-red-500 hover:underline">
+                <a
+                  href="#"
+                  className="font-medium text-red-600 dark:text-red-500 hover:underline"
+                  onChange={() => handleDelete(achat.numero, achat.codeProduit)}
+                >
                   Supprimer
                 </a>
               </td>

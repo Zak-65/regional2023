@@ -18,7 +18,7 @@ export default function achatsReducer(state = initialAchats, action) {
     case "SUPPRIMER_ACHAT":
       return {
         ...state,
-        achats: state.achats.filter((achat) => achat.id !== action.payload),
+        achats: state.achats.filter((achat) => achat.numero != action.payload.numero && achat.codeProduit != action.payload.codeProduit),
       };
 
     default:

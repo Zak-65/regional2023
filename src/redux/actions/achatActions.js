@@ -12,10 +12,13 @@ function modifierAchatAction(newAchat) {
   };
 }
 
-function supprimerAchatAction(achatID) {
+function supprimerAchatAction(numero, codeProduit) {
   return {
     type: "SUPPRIMER_ACHAT",
-    payload: achatID,
+    payload: {
+      numero,
+      codeProduit,
+    },
   };
 }
 

@@ -1,11 +1,43 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { ajouterAchatAction } from "./../../redux/actions/achatActions";
+import { ajouterClientAction } from "./../../redux/actions/clientActions";
 
-export default function FormAddAchats({ produits }) {
-  function getClientID() {
+export default function FormAddAchats({ produits, clients }) {
+  const [client, setClient] = useState({ numero: getClientID(clients) });
+  const [achat, setAchat] = useState({ numero: client.numero });
+  const dispatch = useDispatch();
 
+  function getClientID(list) {
+    const clientID = Math.max(...list.map((l) => parseInt(l.numero))) + 1;
+    return clientID;
+  }
+
+  function handleChangeClient(e) {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setClient({ ...client, [name]: value });
+  }
+
+  function handleChangeAchat(e) {
+    const name = e.target.name;
+    const value = e.target.value;
+
+    setAchat({ ...achat, [name]: value });
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    dispatch(ajouterAchatAction(achat));
+    dispatch(ajouterClientAction(client));
   }
 
   return (
-    <form className="max-w-sm w-full p-6  m-5 bg-white rounded-lg shadow-lg dark:bg-gray-900 dark:shadow-lg dark:border-gray-700">
+    <form
+      className="max-w-sm w-full p-6  m-5 bg-white rounded-lg shadow-lg dark:bg-gray-900 dark:shadow-lg dark:border-gray-700"
+      onSubmit={handleSubmit}
+    >
       {/* Title */}
       <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-6 text-center">Ajouter un achat</h2>
 
@@ -15,7 +47,7 @@ export default function FormAddAchats({ produits }) {
           Nom
         </label>
         <input
-          onChange={handleChange}
+          onChange={handleChangeClient}
           type="text"
           name="nom"
           className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-700 dark:placeholder-gray-500 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -30,7 +62,7 @@ export default function FormAddAchats({ produits }) {
           Prénom
         </label>
         <input
-          onChange={handleChange}
+          onChange={handleChangeClient}
           type="text"
           name="prenom"
           className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-700 dark:placeholder-gray-500 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -45,7 +77,7 @@ export default function FormAddAchats({ produits }) {
           Produit
         </label>
         <select
-          onChange={handleChange}
+          onChange={handleChangeAchat}
           name="codeProduit"
           className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           required
@@ -53,8 +85,10 @@ export default function FormAddAchats({ produits }) {
           <option value="" disabled>
             Sélectionnez un produit
           </option>
-          {produits.map((p) => (
-            <option value={p.codeProduit}>{p.intitule}</option>
+          {produits.map((p, index) => (
+            <option key={index} value={p.codeProduit}>
+              {p.intitule}
+            </option>
           ))}
         </select>
       </div>
@@ -65,7 +99,7 @@ export default function FormAddAchats({ produits }) {
           Quantité
         </label>
         <input
-          onChange={handleChange}
+          onChange={handleChangeAchat}
           type="number"
           name="qte"
           min="1"
