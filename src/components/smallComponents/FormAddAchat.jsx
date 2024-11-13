@@ -38,7 +38,7 @@ export default function FormAddAchats() {
             Produit
           </label>
           <select id="product" className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-            <option value="" disabled selected>
+            <option value="" disabled>
               Sélectionnez un produit
             </option>
             <option value="product1">Produit 1</option>

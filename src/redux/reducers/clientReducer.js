@@ -1,7 +1,7 @@
 import initialData from "../../data/data";
 
 const initialClients = {
-  achats: initialData.clients,
+  clients: initialData.clients,
 };
 
 export default function achatsReducer(state = initialClients, action) {
