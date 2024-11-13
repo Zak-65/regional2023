@@ -29,6 +29,7 @@ export default function FormAddAchats({ produits, clients }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    console.log(achat, client);
     dispatch(ajouterAchatAction(achat));
     dispatch(ajouterClientAction(client));
   }
