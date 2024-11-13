@@ -16,6 +16,7 @@ export default function achatsReducer(state = initialAchats, action) {
       };
 
     case "SUPPRIMER_ACHAT":
+      console.log(action);
       return {
         ...state,
         achats: state.achats.filter((achat) => achat.numero != action.payload.numero && achat.codeProduit != action.payload.codeProduit),

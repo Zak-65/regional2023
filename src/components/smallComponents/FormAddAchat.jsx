@@ -1,24 +1,10 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { ajouterAchatAction } from "./../../redux/actions/achatActions";
-import { ajouterClientAction } from "./../../redux/actions/clientActions";
 
 export default function FormAddAchats({ produits, clients }) {
-  const [client, setClient] = useState({ numero: getClientID(clients) });
-  const [achat, setAchat] = useState({ numero: client.numero });
+  const [achat, setAchat] = useState({});
   const dispatch = useDispatch();
-
-  function getClientID(list) {
-    const clientID = Math.max(...list.map((l) => parseInt(l.numero))) + 1;
-    return clientID;
-  }
-
-  function handleChangeClient(e) {
-    const name = e.target.name;
-    const value = e.target.value;
-
-    setClient({ ...client, [name]: value });
-  }
 
   function handleChangeAchat(e) {
     const name = e.target.name;
@@ -29,9 +15,7 @@ export default function FormAddAchats({ produits, clients }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(achat, client);
     dispatch(ajouterAchatAction(achat));
-    dispatch(ajouterClientAction(client));
   }
 
   return (
@@ -42,34 +26,26 @@ export default function FormAddAchats({ produits, clients }) {
       {/* Title */}
       <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-6 text-center">Ajouter un achat</h2>
 
-      {/* Name Input */}
       <div className="mb-5">
-        <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          Nom
+        <label htmlFor="product" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+          Client
         </label>
-        <input
-          onChange={handleChangeClient}
-          type="text"
-          name="nom"
-          className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-700 dark:placeholder-gray-500 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Entrez votre nom"
+        <select
+          defaultValue={""}
+          onChange={handleChangeAchat}
+          name="numero"
+          className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           required
-        />
-      </div>
-
-      {/* Prenom Input */}
-      <div className="mb-5">
-        <label htmlFor="prenom" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-          Prénom
-        </label>
-        <input
-          onChange={handleChangeClient}
-          type="text"
-          name="prenom"
-          className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-700 dark:placeholder-gray-500 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          placeholder="Entrez votre prénom"
-          required
-        />
+        >
+          <option value="" disabled>
+            Sélectionnez un Client
+          </option>
+          {clients.map((c, index) => (
+            <option key={index} value={c.numero}>
+              {`${c.nom} ${c.prenom}`}
+            </option>
+          ))}
+        </select>
       </div>
 
       {/* Product Select */}
@@ -78,6 +54,7 @@ export default function FormAddAchats({ produits, clients }) {
           Produit
         </label>
         <select
+          defaultValue={""}
           onChange={handleChangeAchat}
           name="codeProduit"
           className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-700 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
