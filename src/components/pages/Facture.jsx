@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import SelectClient from "../smallComponents/SelecteClient";
 import Table from "../smallComponents/Table";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Facture() {
   const clients = useSelector((state) => state.clientReducer.clients);
